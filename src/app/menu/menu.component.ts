@@ -10,6 +10,7 @@ export class MenuComponent implements OnInit {
     home: string = '';
     anotacoes: string = '';
     login: string = '';
+    links: string = '';
 
     constructor() { }
 
@@ -17,6 +18,7 @@ export class MenuComponent implements OnInit {
         this.home = '';
         this.anotacoes = '';
         this.login = '';
+        this.links = '';
     }
 
     menuActive(active: any) {
@@ -32,6 +34,9 @@ export class MenuComponent implements OnInit {
             case 'login':
                 this.login = 'active';
                 break;
+            case 'links':
+                this.links = 'active';
+                break;
             default:
                 break;
         }
@@ -45,6 +50,9 @@ export class MenuComponent implements OnInit {
             this.anotacoes = 'active';
         }
         if (window.location.hash == '#/login') {
+            this.login = 'active';
+        }
+        if (window.location.hash == '#/links') {
             this.login = 'active';
         }
     }

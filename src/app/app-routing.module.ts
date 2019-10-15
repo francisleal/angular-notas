@@ -3,16 +3,20 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
     {
-        path: 'login',
-        loadChildren: './login/login.module#LoginModule'
-    },
-    {
         path: 'home',
         loadChildren: './home/home.module#HomeModule'
     },
     {
         path: 'anotacoes',
         loadChildren: './anotacoes/anotacoes.module#AnotacoesModule'
+    },
+    {
+        path: 'links',
+        loadChildren: './links/links.module#LinksModule'
+    },
+    {
+        path: 'login',
+        loadChildren: './login/login.module#LoginModule'
     },
     {
         path: '',
