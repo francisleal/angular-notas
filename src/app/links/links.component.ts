@@ -8,7 +8,8 @@ import { NotasService } from '../notas.service';
 })
 export class LinksComponent implements OnInit {
 
-    linksJson:any = []
+    private linksJson: any = []
+    private show: boolean = true;
 
     constructor(private NotasService: NotasService) { }
 
@@ -20,20 +21,25 @@ export class LinksComponent implements OnInit {
         this.NotasService.getLinks().subscribe(
             response => {
                 this.linksJson = response;
+                console.log(response.length)
+                this.show = true;
             },
             error => {
-                alert('servidor não encontrado')
+                this.show = false;
             }
         )
     }
 
-    public deletar(id:string) {
-        console.log(id);
-        // NotasService.delete(id).subscribe(
-        //     response => {
-        //         this.listarLinks();
-        //     }
-        // )
+    public deletar(id: string) {
+        this.NotasService.delete(id).subscribe(
+            response => {
+                this.listarLinks();
+            }
+        )
+    }
+
+    public editar(link: string) {
+        console.log(link)
     }
 
 }

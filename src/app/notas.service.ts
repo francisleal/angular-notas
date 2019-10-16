@@ -16,4 +16,13 @@ export class NotasService {
     public getLinks(): Observable<Links[]> {
         return this.http.get<Links[]>(this.url);
     }
+
+    public salvarLink(link: Links): Observable<Links> {
+        return this.http.post<Links>(this.url, link);
+    }
+
+    public delete(id: string): Observable<any> {
+        return this.http.delete(this.url + "/" + id);
+    }
+
 }
