@@ -8,8 +8,11 @@ import { NotasService } from '../notas.service';
 })
 export class LinksComponent implements OnInit {
 
-    private linksJson: any = []
-    private show: boolean = true;
+    linksJson: any = []
+    show: boolean = true;
+    order: string = 'titulo';
+
+    reverse: boolean = false;
 
     constructor(private NotasService: NotasService) { }
 
@@ -17,7 +20,7 @@ export class LinksComponent implements OnInit {
         this.listarLinks();
     }
 
-    public listarLinks() {
+    private listarLinks() {
         this.NotasService.getLinks().subscribe(
             response => {
                 this.linksJson = response;
@@ -38,8 +41,19 @@ export class LinksComponent implements OnInit {
         )
     }
 
-    public editar(link: string) {
-        console.log(link)
+    public setOrder(value: string) {
+        if (this.order === value) {
+          this.reverse = !this.reverse;
+        }    
+        this.order = value;
+
+        console.log(value);
+    }
+
+
+    // falta
+    public editar (links: any) {
+        console.log(links.titulo)
     }
 
 }

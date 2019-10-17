@@ -1,0 +1,8 @@
+.none {
+    display: none;
+}
+
+.none.active {
+    display: inline-block;
+    vertical-align: text-top;
+}

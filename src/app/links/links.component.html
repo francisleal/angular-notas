@@ -19,18 +19,31 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">tipo</th>
-                    <th scope="col">links</th>
+                    <th (click)="setOrder('icon')" scope="col">
+                        tipo
+                        <span class="none" [class.active]="order === 'icon'">
+                            <span [hidden]="reverse">▼</span>
+                            <span [hidden]="!reverse">▲</span>
+                        </span>
+                    </th>
+                    <th (click)="setOrder('titulo')" scope="col">
+                        links
+                        <span class="none" [class.active]="order === 'titulo'">
+                            <span [hidden]="reverse">▼</span>
+                            <span [hidden]="!reverse">▲</span>
+                        </span>
+                    </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let link of linksJson index as i">
+                <tr *ngFor="let link of linksJson | orderBy: order:reverse:'case-insensitive' ; index as i">
                     <th scope="row">{{i + 1}}</th>
                     <td>{{link.icon}}</td>
                     <td><a href="{{link.url}}" target="_blank" rel="noopener noreferrer">{{link.titulo}}</a></td>
-                    <td>
-                        <button (click)="deletar(link.id)" title="deletar" type="button" class="btn btn-secondary btn-sm">
+                    <td style="text-align: right;">
+                        <button (click)="deletar(link.id)" title="deletar" type="button"
+                            class="btn btn-secondary btn-sm">
                             <svg style="width: 12px;" aria-hidden="true" focusable="false" data-prefix="fas"
                                 data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
                                 class="svg-inline--fa fa-trash fa-w-14 fa-3x">
@@ -39,7 +52,9 @@
                                     class=""></path>
                             </svg>
                         </button>
-                        <button (click)="editar(link)" title="editar" type="button" class="btn btn-secondary btn-sm">
+                        <!-- <button (click)="editar(link)" routerLink="add" title="editar" type="button" class="btn btn-secondary btn-sm"> -->
+                        <button (click)="editar(link)" routerLink="add" title="editar" type="button"
+                            class="btn btn-secondary btn-sm">
                             <svg style="width: 14px;" aria-hidden="true" focusable="false" data-prefix="fas"
                                 data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                 class="svg-inline--fa fa-pen fa-w-16 fa-3x">
