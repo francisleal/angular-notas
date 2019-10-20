@@ -7,53 +7,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-    home: string = '';
-    anotacoes: string = '';
-    login: string = '';
-    links: string = '';
+    public menuActive: string;
 
     constructor() { }
 
-    removeActive() {
-        this.home = '';
-        this.anotacoes = '';
-        this.login = '';
-        this.links = '';
-    }
-
-    menuActive(active: any) {
-        this.removeActive();
-
-        switch (active) {
-            case 'home':
-                this.home = 'active';
+    initActive() {
+        switch (window.location.hash) {
+            case '#/home':
+                this.menuActive = 'home';
                 break;
-            case 'anotacoes':
-                this.anotacoes = 'active';
+            case '#/anotacoes':
+                this.menuActive = 'anotacoes';
                 break;
-            case 'login':
-                this.login = 'active';
+            case '#/links':
+                this.menuActive = 'links';
                 break;
-            case 'links':
-                this.links = 'active';
+            case '#/login':
+                this.menuActive = 'login';
                 break;
             default:
                 break;
-        }
-    }
-
-    initActive() {
-        if (window.location.hash == '#/home') {
-            this.home = 'active';
-        }
-        if (window.location.hash == '#/anotacoes') {
-            this.anotacoes = 'active';
-        }
-        if (window.location.hash == '#/login') {
-            this.login = 'active';
-        }
-        if (window.location.hash == '#/links') {
-            this.login = 'active';
         }
     }
 
