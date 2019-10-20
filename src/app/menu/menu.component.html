@@ -2,8 +2,7 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" [class.active]="menuActive == 'home'" (click)="menuActive = 'home'" id="home"
-                    routerLink="home">
+                <a class="nav-link" routerLink="home" routerLinkActive="active">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-home">
@@ -14,8 +13,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [class.active]="menuActive == 'anotacoes'" (click)="menuActive = 'anotacoes'"
-                    id="anotacoes" routerLink="anotacoes">
+                <a class="nav-link" id="anotacoes" routerLink="anotacoes" routerLinkActive="active">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-file">
@@ -26,8 +24,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [class.active]="menuActive == 'links'" (click)="menuActive = 'links'" id="links"
-                    routerLink="links">
+                <a class="nav-link" id="links" routerLinkActive="active" routerLink="links">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-layers">
@@ -39,7 +36,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [class.active]="menuActive == 'login'" (click)="menuActive = 'login'" routerLink="login">
+                <a class="nav-link" routerLink="login" routerLinkActive="active">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-users">

@@ -11,26 +11,5 @@ export class MenuComponent implements OnInit {
 
     constructor() { }
 
-    initActive() {
-        switch (window.location.hash) {
-            case '#/home':
-                this.menuActive = 'home';
-                break;
-            case '#/anotacoes':
-                this.menuActive = 'anotacoes';
-                break;
-            case '#/links':
-                this.menuActive = 'links';
-                break;
-            case '#/login':
-                this.menuActive = 'login';
-                break;
-            default:
-                break;
-        }
-    }
-
-    ngOnInit() {
-        this.initActive();
-    }
+    ngOnInit() { }
 }
