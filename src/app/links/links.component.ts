@@ -9,10 +9,27 @@ import { NotasService } from '../notas.service';
 export class LinksComponent implements OnInit {
 
     linksJson: any = []
-    show: boolean = true;
     order: string = 'titulo';
 
     reverse: boolean = false;
+
+    loading: any = {
+        spiner: true,
+        container: true
+    }
+
+    id: any;
+
+    textoExemproJson: string = `
+    {
+        "links": [
+          {
+            "icon": "important",
+            "id": "1552061787185",
+            "titulo": "json-server",
+            "url": "https://github.com/typicode/json-server"
+          }
+    }`
 
     constructor(private NotasService: NotasService) { }
 
@@ -24,36 +41,32 @@ export class LinksComponent implements OnInit {
         this.NotasService.getLinks().subscribe(
             response => {
                 this.linksJson = response;
-                console.log(response.length)
-                this.show = true;
+                this.loading.spiner = false;
             },
             error => {
-                this.show = false;
+                this.loading.spiner = false;
+                this.loading.container = false;
             }
         )
     }
 
     public deletar(id: string) {
         this.NotasService.delete(id).subscribe(
-            response => {
-                this.listarLinks();
-            }
+            sucesso => this.listarLinks()
         )
     }
 
     public setOrder(value: string) {
         if (this.order === value) {
-          this.reverse = !this.reverse;
-        }    
+            this.reverse = !this.reverse;
+        }
         this.order = value;
-
-        console.log(value);
     }
 
 
     // falta
-    public editar (links: any) {
-        console.log(links.titulo)
+    public editar(links: any) {
+        this.id = `/edit/${links.id}`;
     }
 
 }

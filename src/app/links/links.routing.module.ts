@@ -11,6 +11,10 @@ const routes: Routes = [
     {
         path: 'add',
         component: LinkCadastroComponent
+    },
+    {
+        path: 'edit/:id',
+        component: LinkCadastroComponent
     }
 ];
 
