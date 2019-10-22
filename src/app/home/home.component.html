@@ -18,3 +18,47 @@
         </button>
     </div>
 </div>
+
+<!-- <div class="container"> -->
+<div class="row my-3">
+    <div class="col">
+        <h4>Dashboard</h4>
+    </div>
+</div>
+<div class="row py-2">
+    <div class="col-md-4 py-1">
+        <div class="card">
+            <div class="card-body">
+                <div style="display: block">
+                    <canvas baseChart [data]="graficoLinksData" [labels]="graficoLinksLabels"
+                        [chartType]="graficoLinksType" [colors]="graficoColor">
+                    </canvas>
+                    {{graficoLinksData}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 py-1">
+        <div class="card">
+            <div class="card-body">
+                <div style="display: block">
+                    <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
+                        [chartType]="doughnutChartType" [colors]="doughnutChartColor">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 py-1">
+        <div class="card">
+            <div class="card-body">
+                <div style="display: block">
+                    <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
+                        [chartType]="doughnutChartType" [colors]="doughnutChartColor">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->
