@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<div *ngIf="loading.spiner">
+<div *ngIf="!loading">
     <svg class="svg-inline--fa fa-spinner fa-w-16 fa-3x rotate" style="width: 16px;" aria-hidden="true"
         focusable="false" data-prefix="fas" data-icon="spinner" role="img" xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 512 512">
@@ -18,104 +18,56 @@
     </svg>
 </div>
 
-<div *ngIf="!loading.spiner">
 
-    <div *ngIf="!loading.container">
-        <p>servidor não encontrado</p>
-        <p><a href="https://github.com/typicode/json-server">https://github.com/typicode/json-server</a></p>        
-        <p><strong>npm install -g json-server</strong></p>
-        <p><strong>start</strong></p>
-        <p>json-server --watch db.json</p>
-        <p><strong>exemplo</strong></p>
-        <pre>{{textoExemproJson}}</pre>
-    </div>
+<div *ngIf="loading" class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th (click)="setOrder('icon')" scope="col" class="tipo" title="clique para ordenar">
+                    tipo
+                    <span class="none" [class.active]="order === 'icon'">
+                        <span [hidden]="reverse">▼</span>
+                        <span [hidden]="!reverse">▲</span>
+                    </span>
+                </th>
+                <th (click)="setOrder('titulo')" scope="col" class="link" title="clique para ordenar">
+                    links
+                    <span class="none" [class.active]="order === 'titulo'">
+                        <span [hidden]="reverse">▼</span>
+                        <span [hidden]="!reverse">▲</span>
+                    </span>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let link of linksJson | orderBy: order:reverse:'case-insensitive' ; index as i">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{link.icon}}</td>
+                <td><a href="{{link.url}}" target="_blank" rel="noopener noreferrer">{{link.titulo}}</a></td>
+                <td style="text-align: right;">
+                    <button (click)="deletar(link.id)" title="deletar" type="button" class="btn btn-secondary btn-sm">
+                        <svg style="width: 12px;" aria-hidden="true" focusable="false" data-prefix="fas"
+                            data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                            class="svg-inline--fa fa-trash fa-w-14 fa-3x">
+                            <path fill="currentColor"
+                                d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
+                                class=""></path>
+                        </svg>
+                    </button>
 
-    <div *ngIf="loading.container" class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th (click)="setOrder('icon')" scope="col" class="tipo" title="clique para ordenar">
-                        tipo
-                        <span class="none" [class.active]="order === 'icon'">
-                            <span [hidden]="reverse">▼</span>
-                            <span [hidden]="!reverse">▲</span>
-                        </span>
-                    </th>
-                    <th (click)="setOrder('titulo')" scope="col" class="link" title="clique para ordenar">
-                        links
-                        <span class="none" [class.active]="order === 'titulo'">
-                            <span [hidden]="reverse">▼</span>
-                            <span [hidden]="!reverse">▲</span>
-                        </span>
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let link of linksJson | orderBy: order:reverse:'case-insensitive' ; index as i">
-                    <th scope="row">{{i + 1}}</th>
-                    <td>{{link.icon}}</td>
-                    <td><a href="{{link.url}}" target="_blank" rel="noopener noreferrer">{{link.titulo}}</a></td>
-                    <td style="text-align: right;">
-                        <button (click)="deletar(link.id)" title="deletar" type="button"
-                            class="btn btn-secondary btn-sm">
-                            <svg style="width: 12px;" aria-hidden="true" focusable="false" data-prefix="fas"
-                                data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
-                                class="svg-inline--fa fa-trash fa-w-14 fa-3x">
-                                <path fill="currentColor"
-                                    d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
-                                    class=""></path>
-                            </svg>
-                        </button>
-                        
-                        <button (click)="editar(link)" title="editar" type="button"
-                            class="btn btn-secondary btn-sm">
-                            <svg style="width: 14px;" aria-hidden="true" focusable="false" data-prefix="fas"
-                                data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                                class="svg-inline--fa fa-pen fa-w-16 fa-3x">
-                                <path fill="currentColor"
-                                    d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z"
-                                    class=""></path>
-                            </svg>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                    <button (click)="editar(link)" title="editar" type="button" class="btn btn-secondary btn-sm">
+                        <svg style="width: 14px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen"
+                            role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                            class="svg-inline--fa fa-pen fa-w-16 fa-3x">
+                            <path fill="currentColor"
+                                d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z"
+                                class=""></path>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-
-
-<!-- icon -->
-<!-- <svg style="width: 13px;" aria-hidden="true" focusable="false" data-prefix="fas"
-    data-icon="file-edit" role="img" xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 384 512" class="svg-inline--fa fa-file-edit fa-w-12 fa-3x">
-    <path fill="currentColor"
-        d="M384 121.9v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-59.6 109.6l-95 95-5.4 48.2c-.7 6.4 4.7 11.9 11.2 11.2l48.2-5.4 95-95c2-2 2-5.2 0-7.2l-46.8-46.8c-2-2-5.2-2-7.2 0zm109.7-30.3l-25.4-25.4c-7.9-7.9-20.7-7.9-28.6 0l-26 26c-2 2-2 5.2 0 7.2l46.8 46.8c2 2 5.2 2 7.2 0l26-26c7.9-7.9 7.9-20.7 0-28.6z"
-        class=""></path>
-</svg> -->
-
-
-<!-- Modal -->
-<!-- <div class="modal fade show" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Salvar mudanças</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-<!-- <div class="modal-backdrop fade show"></div> -->

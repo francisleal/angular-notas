@@ -15,21 +15,7 @@ export class LinksComponent implements OnInit {
 
     reverse: boolean = false;
 
-    loading: any = {
-        spiner: true,
-        container: true
-    }
-
-    textoExemproJson: string = `
-    {
-        "links": [
-          {
-            "icon": "important",
-            "id": "1552061787185",
-            "titulo": "json-server",
-            "url": "https://github.com/typicode/json-server"
-          }
-    }`
+    loading: boolean;
 
     constructor(
         private router: Router,
@@ -44,12 +30,9 @@ export class LinksComponent implements OnInit {
         this.NotasService.getLinks().subscribe(
             response => {
                 this.linksJson = response;
-                this.loading.spiner = false;
+                this.loading = true;
             },
-            error => {
-                this.loading.spiner = false;
-                this.loading.container = false;
-            }
+            error => this.loading = false
         )
     }
 

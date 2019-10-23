@@ -19,6 +19,11 @@ export class HomeComponent implements OnInit {
     public doughnutChartType = 'doughnut';
     public doughnutChartColor = [{ backgroundColor: ['rgba(0,0,255,0.3)'] }];
 
+    private servidor: any = {
+        loading: true,
+        dashboard: true
+    };
+
     constructor(private notasService: NotasService) { }
 
     ngOnInit() {
@@ -27,8 +32,14 @@ export class HomeComponent implements OnInit {
 
     public graficoLinks() {
         this.notasService.getLinks().subscribe(
-            sucesso => this.graficoLinksData = [sucesso.length, (100 - sucesso.length)]
+            sucesso => {
+                this.graficoLinksData = [sucesso.length, (100 - sucesso.length)]
+                this.servidor.loading = false
+            },
+            error =>{
+                this.servidor.loading = false
+                this.servidor.dashboard = false
+            } 
         )
     }
-
 }
