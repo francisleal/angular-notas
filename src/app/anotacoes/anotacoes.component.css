@@ -1,0 +1,33 @@
+.card {
+    width: 31%;
+    margin-right: 16px;
+    margin-bottom: 16px;
+}
+
+textarea {
+    border: none;
+    resize: none;
+    width: 100%;
+}
+
+.input {
+    background: transparent;
+    border: none;
+    width: 100%;
+}
+
+.salvar,
+.editar,
+.excluir {
+    cursor: pointer;
+}
+
+.salvar:hover,
+.editar:hover, 
+.excluir:hover {
+    color: #0069d9;
+}
+
+.excluir {
+    float: right;
+}
