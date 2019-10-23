@@ -1,1 +1,30 @@
-<p>login works!</p>
+<div class="login-container">
+    <div class="form-signin">
+        <div class="text-center mb-4">
+            <h1 class="h3 mb-3 font-weight-normal">Login Notas Angular</h1>
+        </div>
+
+        <div class="form-label-group">
+            <input [(ngModel)]="usuario.nome" id="inputEmail" class="form-control" placeholder="Email address" type="email" required="" />
+            <label for="inputEmail">Email address</label>
+        </div>
+
+        <div class="form-label-group">
+            <input [(ngModel)]="usuario.senha" id="inputPassword" class="form-control" placeholder="Password" type="password" required="" />
+            <label for="inputPassword">Password</label>
+        </div>
+
+        <div class="checkbox mb-3">
+            <label>
+                <input value="remember" type="checkbox" /> Lembrar senha
+            </label>
+            <span class="criar-nova-conta">criar nova conta</span>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" (click)="logar()">Logar</button>
+    </div>
+</div>
+
+<!-- <input [(ngModel)]="usuario.nome" type="text" name="" id="">
+
+<button class="btn btn-lg btn-primary btn-block" (click)="logar()">Logar</button> -->

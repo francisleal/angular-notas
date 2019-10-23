@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+<nav *ngIf="mostrarMenu" class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
         <img src="../favicon.ico" class="logo" />
         Angular Notas
@@ -6,16 +6,16 @@
     <input class="form-control form-control-dark w-100" placeholder="Search" aria-label="Search" type="text">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sair</a>
+            <a class="nav-link" (click)="deslogar()">Sair</a>
         </li>
     </ul>
 </nav>
 
 <div class="container-fluid">
     <div class="row">
-        <menu></menu>
+        <menu *ngIf="mostrarMenu"></menu>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <main role="main" class="col-md" [ngClass]="{'col-md-9 ml-sm-auto col-lg-10 px-4' : mostrarMenu}">
             <router-outlet></router-outlet>
         </main>
     </div>
