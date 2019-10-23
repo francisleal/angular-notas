@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { NotasService } from '../notas.service';
 
 @Component({
@@ -18,8 +20,6 @@ export class LinksComponent implements OnInit {
         container: true
     }
 
-    id: any;
-
     textoExemproJson: string = `
     {
         "links": [
@@ -31,7 +31,10 @@ export class LinksComponent implements OnInit {
           }
     }`
 
-    constructor(private NotasService: NotasService) { }
+    constructor(
+        private router: Router,
+        private NotasService: NotasService
+    ) { }
 
     ngOnInit() {
         this.listarLinks();
@@ -63,10 +66,8 @@ export class LinksComponent implements OnInit {
         this.order = value;
     }
 
-
-    // falta
-    public editar(links: any) {
-        this.id = `/edit/${links.id}`;
+    public editar(link: any) {
+        this.router.navigate(['links/edit', link.id])
     }
 
 }

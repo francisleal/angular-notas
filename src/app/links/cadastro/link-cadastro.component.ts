@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Links } from '../links';
 import { NotasService } from 'src/app/notas.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-link-cadastro',
@@ -12,7 +13,9 @@ import { NotasService } from 'src/app/notas.service';
 export class LinkCadastroComponent implements OnInit {
 
     public link: Links = new Links()
-    public save : boolean = true;
+    public save: boolean = true
+    public inscricao: Subscription
+
 
     constructor(
         private route: ActivatedRoute,
@@ -21,9 +24,11 @@ export class LinkCadastroComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        if (this.route.snapshot.url[0].path == 'edit') {            
-            this.edit(this.route.snapshot.paramMap.get('id'))
-        }
+        this.paginaEditar()
+    }
+
+    ngOnDestroy() {
+        this.inscricao.unsubscribe();
     }
 
     public salvar() {
@@ -35,24 +40,26 @@ export class LinkCadastroComponent implements OnInit {
         )
     }
 
-    public editar() {        
+    public editar() {
         this.notasService.editarLink(this.link).subscribe(
             sucesso => console.log('editado com sucesso', sucesso),
             error => console.log('error->', error)
         )
     }
 
-    public edit(rota: string) {
-        this.save = false;
+    paginaEditar () {
+        this.inscricao = this.route.params.subscribe(
+            route => {
+                if (typeof route.id != 'undefined') {
+                    
+                    this.notasService.edit(route.id).subscribe(
+                        link => this.link = link,
+                        error => console.log('edit error->', error)
+                    )
 
-        this.notasService.edit(rota).subscribe(
-            editar => {
-                this.link.id = editar.id
-                this.link.url = editar.url;
-                this.link.icon = editar.icon
-                this.link.titulo = editar.titulo;
-            },
-            error => console.log('edit error->', error)
+                    this.save = false;
+                }
+            }
         )
     }
 
