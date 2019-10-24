@@ -2,7 +2,8 @@
     <h1 class="h2">Anotações</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
-            <button class="btn btn-sm btn-outline-secondary" (click)="adicionar()" [disabled]="isDisabled">Adicionar</button>
+            <button class="btn btn-sm btn-outline-secondary" (click)="adicionar()"
+                [disabled]="isDisabled">Adicionar</button>
             <button class="btn btn-sm btn-outline-secondary">Exportar</button>
         </div>
         <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
@@ -20,133 +21,20 @@
 </div>
 
 <div class=" d-flex flex-wrap">
-    <div *ngFor="let card of cards" class="card">
+    <div *ngFor="let card of cards" class="card" [style.borderColor]="isReadonly != card.id ? '#dfdfdf' : 'green'">
         <div class="card-header">
-            <input [(ngModel)]="card.titulo" [readonly]="isReadonly" type="text" class="input" placeholder="Título">
+            <input [(ngModel)]="card.titulo" [readonly]="isReadonly != card.id" type="text" class="input"
+                placeholder="Título">
         </div>
         <div class="card-body">
-            <textarea [(ngModel)]="card.descricao"  [readonly]="isReadonly" cols="30" rows="10" placeholder="Descrição"></textarea>
+            <textarea [(ngModel)]="card.descricao" [readonly]="isReadonly != card.id" cols="30" rows="10"
+                placeholder="Descrição"></textarea>
         </div>
         <div class="card-footer">
-            <small *ngIf="!isReadonly" class="text-muted" (click)="salvar(card)" class="salvar">salvar</small>
-            <small *ngIf="isReadonly" class="text-muted" (click)="editar()" class="editar">editar</small>
+            <small *ngIf="isReadonly == card.id" lass="text-muted" (click)="salvar(card)" class="salvar">salvar</small>
+            <small *ngIf="isReadonly != card.id" class="text-muted" (click)="isReadonly = card.id"
+                class="editar">editar</small>
             <small class="text-muted" (click)="excluir(card.id)" class="excluir">excluir</small>
         </div>
     </div>
-
-    <!-- <div class="card">
-        <div class="card-header">
-            Destaque
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Título do card</h5>
-            <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um
-                conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Atualizados 3 minutos atrás</small>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            Destaque
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Título do card</h5>
-            <p class="card-text">Este é um card com suporte a texto embaixo, que funciona como uma introdução a um
-                conteúdo adicional.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Atualizados 3 minutos atrás</small>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            Destaque
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Título do card</h5>
-            <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um
-                conteúdo adicional. Este card tem o conteúdo ainda maior que o primeiro, para mostrar a altura igual, em
-                ação.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Atualizados 3 minutos atrás</small>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            Destaque
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Título do card</h5>
-            <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um
-                conteúdo adicional. Este card tem o conteúdo ainda maior que o primeiro, para mostrar a altura igual, em
-                ação.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Atualizados 3 minutos atrás</small>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            Destaque
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Título do card</h5>
-            <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um
-                conteúdo adicional. Este conteúdo é um pouco maior, para demonstração.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Atualizados 3 minutos atrás</small>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            Destaque
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Título do card</h5>
-            <p class="card-text">Este é um card com suporte a texto embaixo, que funciona como uma introdução a um
-                conteúdo adicional.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Atualizados 3 minutos atrás</small>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            Destaque
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Título do card</h5>
-            <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um
-                conteúdo adicional. Este card tem o conteúdo ainda maior que o primeiro, para mostrar a altura igual, em
-                ação.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Atualizados 3 minutos atrás</small>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            Destaque
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Título do card</h5>
-            <p class="card-text">Este é um card maior com suporte a texto embaixo, que funciona como uma introdução a um
-                conteúdo adicional. Este card tem o conteúdo ainda maior que o primeiro, para mostrar a altura igual, em
-                ação.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Atualizados 3 minutos atrás</small>
-        </div>
-    </div> -->
 </div>

@@ -10,10 +10,8 @@ import { NotasService } from '../notas.service';
 export class AnotacoesComponent implements OnInit {
 
     private anotacao: Anotacao = new Anotacao()
-
-    isDisabled: boolean = false;
-    isReadonly: boolean = false
-    cards: any = []
+    private isReadonly: boolean = true
+    private cards: any = []
 
     constructor(private notasService: NotasService) { }
 
@@ -21,33 +19,45 @@ export class AnotacoesComponent implements OnInit {
         this.listarAnotacoes();
     }
 
-    listarAnotacoes() {
+    private listarAnotacoes() {
         this.notasService.getAnotacoes().subscribe(
-            cards => {
-                this.cards = cards
-                console.log(this.cards)
-            }
+            cards => this.cards = Object.values(cards)[1]
         );
     }
 
-    adicionar() {
+    private adicionar() {
         this.anotacao.id = Math.floor(Math.random() * 999999);
         this.cards.unshift({ id: this.anotacao.id });
-        this.isDisabled = true;
+        this.isReadonly = this.anotacao.id
     }
 
-    salvar(anotacao: any) {
-        this.isReadonly = true;
-        console.log(this.anotacao = anotacao)
-    }
+    private salvar(anotacao: any) {
+        this.cards.unshift(anotacao)
+        this.cards.shift()
 
-    editar() {
         this.isReadonly = false
+
+        this.salvarService(this.cards);
     }
 
-    excluir(card: number) {
-        // console.log(this.cards);
-        console.log('id ', card);
-        this.isDisabled = false;
+    private editar() {
+        this.isReadonly = false;
+    }
+
+    private excluir(card: number) {
+        let exAnotacao = this.cards.filter((anotacao: Anotacao) => anotacao.id != card)
+        this.cards = exAnotacao;
+
+        this.salvarService(this.cards);
+    }
+
+    private salvarService(anotacoesParametro: any) {
+
+        let anotacoes = { id: 'notas', notas: anotacoesParametro }
+
+        this.notasService.salvarAnotacao(anotacoes).subscribe(
+            sucesso => console.log('sucesso ', sucesso),
+            error => console.log('error ', error)
+        )
     }
 }

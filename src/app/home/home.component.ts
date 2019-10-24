@@ -9,37 +9,45 @@ import { NotasService } from '../notas.service';
 })
 export class HomeComponent implements OnInit {
 
-    public graficoLinksLabels = ['Links'];
-    public graficoLinksData: number[] = [];
-    public graficoLinksType = 'doughnut';
-    public graficoColor = [{ backgroundColor: ['#007bff'] }];
-
-    public doughnutChartLabels = ['undefined'];
-    public doughnutChartData = [100, 50];
-    public doughnutChartType = 'doughnut';
-    public doughnutChartColor = [{ backgroundColor: ['rgba(0,0,255,0.3)'] }];
-
     private servidor: any = {
         loading: true,
         dashboard: true
     };
 
+    countAnotacoes: any = []
+
+    public graficoLinksData: number[] = [];
+    public graficoColor = [{ backgroundColor: ['#007bff'] }];
+
+    public graficoAntData = [100, 50];
+    public graficoAntColor = [{ backgroundColor: ['rgba(0,0,255,0.3)'] }];    
+
     constructor(private notasService: NotasService) { }
 
     ngOnInit() {
         this.graficoLinks()
+        this.graficoAnotacoes()
     }
 
-    public graficoLinks() {
+    private graficoLinks() {
         this.notasService.getLinks().subscribe(
             sucesso => {
                 this.graficoLinksData = [sucesso.length, (100 - sucesso.length)]
                 this.servidor.loading = false
             },
-            error =>{
+            error => {
                 this.servidor.loading = false
                 this.servidor.dashboard = false
-            } 
+            }
+        )
+    }   
+
+    private graficoAnotacoes() {
+        this.notasService.getAnotacoes().subscribe(
+            sucesso => {              
+              this.countAnotacoes = Object.values(sucesso)[1];
+              this.graficoAntData = [this.countAnotacoes.length, (100 - this.countAnotacoes.length)]                
+            }
         )
     }
 }

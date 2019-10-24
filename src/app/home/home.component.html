@@ -45,40 +45,48 @@
             </div>
         </div>
         <div class="row py-2">
+            <!-- links -->
             <div class="col-md-4 py-1">
                 <div class="card">
                     <div class="card-body">
                         <div style="display: block">
-                            <canvas baseChart [data]="graficoLinksData" [labels]="graficoLinksLabels"
-                                [chartType]="graficoLinksType" [colors]="graficoColor">
+                            <canvas baseChart [data]="graficoLinksData" [labels]="['Links']" [chartType]="'doughnut'"
+                                [colors]="graficoColor">
                             </canvas>
                             {{graficoLinksData}}
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- anotações -->
             <div class="col-md-4 py-1">
                 <div class="card">
                     <div class="card-body">
                         <div style="display: block">
-                            <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
-                                [chartType]="doughnutChartType" [colors]="doughnutChartColor">
+                            <canvas baseChart [data]="graficoAntData" [labels]="['Anotações']" [chartType]="'doughnut'"
+                                [colors]="graficoAntColor">
                             </canvas>
+                            {{graficoAntData}}
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- undefined -->
             <div class="col-md-4 py-1">
                 <div class="card">
                     <div class="card-body">
                         <div style="display: block">
-                            <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
-                                [chartType]="doughnutChartType" [colors]="doughnutChartColor">
+                            <canvas baseChart [data]="[20,80]" [labels]="['undefined']" [chartType]="'doughnut'"
+                                [colors]="graficoAntColor">
                             </canvas>
+                            undefined
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

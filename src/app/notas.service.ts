@@ -37,7 +37,10 @@ export class NotasService {
     }
 
     public getAnotacoes():Observable<Anotacao[]> {
-        return this.http.get<Anotacao[]>(`${this.url}/anotacao/`);
+        return this.http.get<Anotacao[]>(`${this.url}/anotacao/notas`);
     }
 
+    public salvarAnotacao(anotacao: any):Observable<Anotacao> {
+        return this.http.put<Anotacao>(`${this.url}/anotacao/notas`, anotacao);
+    }
 }
