@@ -10,7 +10,8 @@ import { NotasService } from '../notas.service';
 })
 export class LinksComponent implements OnInit {
 
-    linksJson: any = []
+    linksJson: any[] = []
+    listaAlm: any[] = []
     order: string = 'titulo';
 
     reverse: boolean = false;
@@ -29,8 +30,10 @@ export class LinksComponent implements OnInit {
     private listarLinks() {
         this.NotasService.getLinks().subscribe(
             response => {
-                this.linksJson = response;
                 this.loading = true;
+
+                this.linksJson = response.filter(lista => lista.icon != 'alm');
+                this.listaAlm = response.filter(lista => lista.icon == 'alm');
             },
             error => this.loading = false
         )

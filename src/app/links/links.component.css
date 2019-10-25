@@ -11,3 +11,23 @@ table th.tipo,
 table th.link {
     cursor: pointer;
 }
+
+.table thead th {
+    border-bottom: 1px solid #dee2e6 !important;
+    border-top: none !important;
+}
+
+.title-tarefa {
+    padding: 0.75rem;
+}
+
+.botoes-lista {
+    text-align: right;
+}
+
+.btn-icon-svg {
+    color: #6c757d;
+    cursor: pointer;
+    width: 14px; 
+    margin-left: 0.75rem;
+}

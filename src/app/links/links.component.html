@@ -20,54 +20,97 @@
 
 
 <div *ngIf="loading" class="table-responsive">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th (click)="setOrder('icon')" scope="col" class="tipo" title="clique para ordenar">
-                    tipo
-                    <span class="none" [class.active]="order === 'icon'">
-                        <span [hidden]="reverse">▼</span>
-                        <span [hidden]="!reverse">▲</span>
-                    </span>
-                </th>
-                <th (click)="setOrder('titulo')" scope="col" class="link" title="clique para ordenar">
-                    links
-                    <span class="none" [class.active]="order === 'titulo'">
-                        <span [hidden]="reverse">▼</span>
-                        <span [hidden]="!reverse">▲</span>
-                    </span>
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let link of linksJson | orderBy: order:reverse:'case-insensitive' ; index as i">
-                <th scope="row">{{i + 1}}</th>
-                <td>{{link.icon}}</td>
-                <td><a href="{{link.url}}" target="_blank" rel="noopener noreferrer">{{link.titulo}}</a></td>
-                <td style="text-align: right;">
-                    <button (click)="deletar(link.id)" title="deletar" type="button" class="btn btn-secondary btn-sm">
-                        <svg style="width: 12px;" aria-hidden="true" focusable="false" data-prefix="fas"
-                            data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
-                            class="svg-inline--fa fa-trash fa-w-14 fa-3x">
-                            <path fill="currentColor"
-                                d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
-                                class=""></path>
-                        </svg>
-                    </button>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <h4 class="title-tarefa">Tarefas Alm</h4>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr *ngFor="let link of listaAlm">
+                            <td>
+                                <a href="{{link.url}}" target="_blank" rel="noopener noreferrer">{{link.titulo}}</a>
+                            </td>
+                            <td class="botoes-lista">
+                                <svg (click)="editar(link)" class="btn-icon-svg" aria-hidden="true"
+                                    focusable="false" data-prefix="fas" data-icon="pen" role="img"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor"
+                                        d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z"
+                                        class=""></path>
+                                </svg>
 
-                    <button (click)="editar(link)" title="editar" type="button" class="btn btn-secondary btn-sm">
-                        <svg style="width: 14px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen"
-                            role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                            class="svg-inline--fa fa-pen fa-w-16 fa-3x">
-                            <path fill="currentColor"
-                                d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z"
-                                class=""></path>
-                        </svg>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                                <svg (click)="deletar(link.id)" class="btn-icon-svg" aria-hidden="true"
+                                    focusable="false" data-prefix="fas" data-icon="trash" role="img"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path fill="currentColor"
+                                        d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
+                                        class=""></path>
+                                </svg>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th (click)="setOrder('icon')" scope="col" class="tipo" title="clique para ordenar">
+                                    tipo
+                                    <span class="none" [class.active]="order === 'icon'">
+                                        <span [hidden]="reverse">▼</span>
+                                        <span [hidden]="!reverse">▲</span>
+                                    </span>
+                                </th>
+                                <th (click)="setOrder('titulo')" scope="col" class="link" title="clique para ordenar">
+                                    links
+                                    <span class="none" [class.active]="order === 'titulo'">
+                                        <span [hidden]="reverse">▼</span>
+                                        <span [hidden]="!reverse">▲</span>
+                                    </span>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let link of linksJson | orderBy: order:reverse:'case-insensitive' ; index as i">
+                                <th scope="row">{{i + 1}}</th>
+                                <td>{{link.icon}}</td>
+                                <td><a href="{{link.url}}" target="_blank" rel="noopener noreferrer">{{link.titulo}}</a>
+                                </td>
+                                <td class="botoes-lista">
+                                    <button (click)="editar(link)" title="editar" type="button"
+                                        class="btn btn-secondary btn-sm">
+                                        <svg style="width: 14px;" aria-hidden="true" focusable="false" data-prefix="fas"
+                                            data-icon="pen" role="img" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 512 512" class="svg-inline--fa fa-pen fa-w-16 fa-3x">
+                                            <path fill="currentColor"
+                                                d="M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z"
+                                                class=""></path>
+                                        </svg>
+                                    </button>
+
+                                    <button (click)="deletar(link.id)" title="deletar" type="button"
+                                        class="btn btn-secondary btn-sm">
+                                        <svg style="width: 12px;" aria-hidden="true" focusable="false" data-prefix="fas"
+                                            data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 448 512" class="svg-inline--fa fa-trash fa-w-14 fa-3x">
+                                            <path fill="currentColor"
+                                                d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
+                                                class=""></path>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
