@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Anotacao } from './anotacao';
 import { NotasService } from '../notas.service';
+import { AlertService } from '../alert/alert.service';
 
 @Component({
     selector: 'app-anotacoes',
@@ -13,7 +14,10 @@ export class AnotacoesComponent implements OnInit {
     private isReadonly: boolean = true
     private cards: any = []
 
-    constructor(private notasService: NotasService) { }
+    constructor(
+        private notasService: NotasService,
+        private alert: AlertService
+    ) { }
 
     ngOnInit() {
         this.listarAnotacoes();
@@ -37,7 +41,7 @@ export class AnotacoesComponent implements OnInit {
 
         this.isReadonly = false
 
-        this.salvarService(this.cards);
+        this.salvarService(this.cards, 'salvo');
     }
 
     private editar() {
@@ -48,16 +52,22 @@ export class AnotacoesComponent implements OnInit {
         let exAnotacao = this.cards.filter((anotacao: Anotacao) => anotacao.id != card)
         this.cards = exAnotacao;
 
-        this.salvarService(this.cards);
+        this.salvarService(this.cards, 'excluido');
     }
 
-    private salvarService(anotacoesParametro: any) {
+    private salvarService(anotacoesParametro: any, alertMensagem: string) {
 
         let anotacoes = { id: 'notas', notas: anotacoesParametro }
 
         this.notasService.salvarAnotacao(anotacoes).subscribe(
-            sucesso => console.log('sucesso ', sucesso),
-            error => console.log('error ', error)
+            sucesso => {
+                if (alertMensagem === 'salvo') {
+                    this.alert.sucesso(`${alertMensagem} - com sucesso`)
+                } else {
+                    this.alert.danger(`${alertMensagem} - com sucesso`)
+                }
+            },
+            error => this.alert.danger(`ERROR - ${error.message}`)
         )
     }
 }

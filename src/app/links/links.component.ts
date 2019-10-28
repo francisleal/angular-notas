@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NotasService } from '../notas.service';
+import { AlertService } from '../alert/alert.service';
 
 @Component({
     selector: 'app-links',
@@ -20,7 +21,8 @@ export class LinksComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private NotasService: NotasService
+        private NotasService: NotasService,
+        private AlertService: AlertService
     ) { }
 
     ngOnInit() {
@@ -41,7 +43,10 @@ export class LinksComponent implements OnInit {
 
     public deletar(id: string) {
         this.NotasService.delete(id).subscribe(
-            sucesso => this.listarLinks()
+            sucesso => {
+                this.listarLinks()
+                this.AlertService.danger('excluido com sucesso')
+            }
         )
     }
 

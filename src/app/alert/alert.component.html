@@ -1,0 +1,6 @@
+<div *ngIf="alert" class="alert" [ngClass]="styleAlertType()" role="alert">
+    <strong>{{ alertMessage }}</strong>
+    <button type="button" class="close" (click)="close()">
+        <span>&times;</span>
+    </button>
+</div>

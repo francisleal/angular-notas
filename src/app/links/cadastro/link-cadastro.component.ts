@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Links } from '../links';
 import { NotasService } from 'src/app/notas.service';
 import { Subscription } from 'rxjs';
+import { AlertService } from 'src/app/alert/alert.service';
 
 @Component({
     selector: 'app-link-cadastro',
@@ -21,6 +22,7 @@ export class LinkCadastroComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private notasService: NotasService,
+        private alertService: AlertService
     ) { }
 
     ngOnInit() {
@@ -35,15 +37,15 @@ export class LinkCadastroComponent implements OnInit {
         this.link.id = Math.floor(Math.random() * 999999);
 
         this.notasService.salvarLink(this.link).subscribe(
-            sucesso => console.log('salvo com sucesso', sucesso),
-            error => console.log('error->', error)
+            sucesso => this.alertService.sucesso(`${sucesso.titulo} - salvo com sucesso`),
+            error => this.alertService.danger(`ERROR - ${error.message}`)
         )
     }
 
     public editar() {
         this.notasService.editarLink(this.link).subscribe(
-            sucesso => console.log('editado com sucesso', sucesso),
-            error => console.log('error->', error)
+            sucesso => this.alertService.sucesso(`${sucesso.titulo} - editado com sucesso`),
+            error => this.alertService.danger(`ERROR - ${error.message}`)
         )
     }
 
@@ -54,7 +56,7 @@ export class LinkCadastroComponent implements OnInit {
                     
                     this.notasService.edit(route.id).subscribe(
                         link => this.link = link,
-                        error => console.log('edit error->', error)
+                        error => this.alertService.danger(`ERROR - ${error.message}`)
                     )
 
                     this.save = false;
