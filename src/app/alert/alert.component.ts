@@ -15,9 +15,9 @@ import { AlertService } from './alert.service';
 })
 export class AlertComponent implements OnInit {
 
-    private alertMessage: string
-    private alertType: string
-    private alert: boolean = false
+    public alertMessage: string
+    public alertType: string
+    public alert: boolean = false
 
     constructor(public alertService: AlertService) { }
 

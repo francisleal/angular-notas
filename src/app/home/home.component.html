@@ -19,6 +19,9 @@
         <p><strong>npm install -g json-server</strong></p>
         <p><strong>start</strong></p>
         <p>json-server --watch db.json</p>
+
+        <hr>
+        <p>json-server --watch dbprod.json --port 3004</p>
     </div>
 
     <div *ngIf="servidor.dashboard">
@@ -27,9 +30,9 @@
                 <h4>Dashboard</h4>
             </div>
         </div>
-        <div class="row py-2">
+        <div class="row">
             <!-- links -->
-            <div class="col-md-4 py-1">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <div style="display: block">
@@ -43,7 +46,7 @@
             </div>
 
             <!-- anotações -->
-            <div class="col-md-4 py-1">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <div style="display: block">
@@ -55,21 +58,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- undefined -->
-            <div class="col-md-4 py-1">
-                <div class="card">
-                    <div class="card-body">
-                        <div style="display: block">
-                            <canvas baseChart [data]="[20,80]" [labels]="['undefined']" [chartType]="'doughnut'"
-                                [colors]="graficoAntColor">
-                            </canvas>
-                            undefined
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>

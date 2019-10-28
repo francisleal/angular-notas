@@ -11,8 +11,8 @@ import { AlertService } from '../alert/alert.service';
 export class AnotacoesComponent implements OnInit {
 
     private anotacao: Anotacao = new Anotacao()
-    private isReadonly: boolean = true
-    private cards: any = []
+    public isReadonly: boolean = true
+    public cards: any = []
 
     constructor(
         private notasService: NotasService,
@@ -29,13 +29,13 @@ export class AnotacoesComponent implements OnInit {
         );
     }
 
-    private adicionar() {
+    public adicionar() {
         this.anotacao.id = Math.floor(Math.random() * 999999);
         this.cards.unshift({ id: this.anotacao.id });
         this.isReadonly = this.anotacao.id
     }
 
-    private salvar(anotacao: any) {
+    public salvar(anotacao: any) {
         this.cards.unshift(anotacao)
         this.cards.shift()
 
@@ -44,11 +44,11 @@ export class AnotacoesComponent implements OnInit {
         this.salvarService(this.cards, 'salvo');
     }
 
-    private editar() {
+    public editar() {
         this.isReadonly = false;
     }
 
-    private excluir(card: number) {
+    public excluir(card: number) {
         let exAnotacao = this.cards.filter((anotacao: Anotacao) => anotacao.id != card)
         this.cards = exAnotacao;
 

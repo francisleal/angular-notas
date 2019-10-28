@@ -9,7 +9,7 @@ import { NotasService } from '../notas.service';
 })
 export class HomeComponent implements OnInit {
 
-    private servidor: any = {
+    public servidor: any = {
         loading: true,
         dashboard: true
     };
