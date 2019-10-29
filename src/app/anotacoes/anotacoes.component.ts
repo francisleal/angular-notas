@@ -11,8 +11,13 @@ import { AlertService } from '../alert/alert.service';
 export class AnotacoesComponent implements OnInit {
 
     private anotacao: Anotacao = new Anotacao()
+
+    public visualizarCardAberto: boolean = false
     public isReadonly: boolean = true
+    public cardOpen: number;
+
     public cards: any = []
+    public cardsMap: any = []
 
     constructor(
         private notasService: NotasService,
@@ -41,7 +46,13 @@ export class AnotacoesComponent implements OnInit {
 
         this.isReadonly = false
 
-        this.salvarService(this.cards, 'salvo');
+        if (this.visualizarCardAberto == true) {
+            this.salvarService(this.cardsMap, 'salvo')
+        }
+
+        if (!this.visualizarCardAberto) {
+            this.salvarService(this.cards, 'salvo')
+        }
     }
 
     public editar() {
@@ -49,10 +60,16 @@ export class AnotacoesComponent implements OnInit {
     }
 
     public excluir(card: number) {
-        let exAnotacao = this.cards.filter((anotacao: Anotacao) => anotacao.id != card)
-        this.cards = exAnotacao;
+        let excluir = this.cards.filter((anotacao: Anotacao) => anotacao.id != card)
 
-        this.salvarService(this.cards, 'excluido');
+        this.cards = excluir;
+
+        if (this.visualizarCardAberto == true) {
+            let excluirMap = this.cardsMap.filter((anotacao: Anotacao) => anotacao.id != card)
+            this.salvarService(excluirMap, 'excluido')
+        }
+
+        if (!this.visualizarCardAberto) this.salvarService(this.cards, 'excluido')
     }
 
     private salvarService(anotacoesParametro: any, alertMensagem: string) {
@@ -69,5 +86,24 @@ export class AnotacoesComponent implements OnInit {
             },
             error => this.alert.danger(`ERROR - ${error.message}`)
         )
+    }
+
+    public open(card: number) {
+        this.visualizarCardAberto = !this.visualizarCardAberto
+        this.cardOpen = card
+        this.mostraSomenteCardAberto(card)
+    }
+
+    private mostraSomenteCardAberto(id: number) {
+        if (this.visualizarCardAberto == true) {
+            this.cardsMap = this.cards
+
+            let filterCard = this.cards.filter((c: any) => c.id == id)
+
+            this.cards = filterCard;
+        } else {
+            this.cards = this.cardsMap;
+            this.cardsMap = [];
+        }
     }
 }

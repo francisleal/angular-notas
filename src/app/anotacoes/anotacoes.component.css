@@ -8,12 +8,13 @@ textarea {
     border: none;
     resize: none;
     width: 100%;
+    height: 100%;
 }
 
 .input {
     background: transparent;
     border: none;
-    width: 100%;
+    width: 90%;
 }
 
 .salvar,
@@ -30,4 +31,20 @@ textarea {
 
 .excluir {
     float: right;
+}
+
+.fa-arrow-to-right {
+    width: 16px;
+    float: right;
+    cursor: pointer;
+}
+
+.card-open {
+    width: 100%;
+    height: 60vh;    
+    transition: 0.5s;
+}
+
+.card-open .fa-arrow-to-right {
+    transform: rotate(180deg);
 }
