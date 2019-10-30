@@ -14,7 +14,6 @@ export class AnotacoesComponent implements OnInit {
 
     public visualizarCardAberto: boolean = false
     public isReadonly: boolean = true
-    public cardOpen: number;
 
     public cards: any = []
     public cardsMap: any = []
@@ -65,8 +64,14 @@ export class AnotacoesComponent implements OnInit {
         this.cards = excluir;
 
         if (this.visualizarCardAberto == true) {
-            let excluirMap = this.cardsMap.filter((anotacao: Anotacao) => anotacao.id != card)
+            let excluirMap = this.cardsMap.filter((c: any) => c.id != card)
+
             this.salvarService(excluirMap, 'excluido')
+
+            setTimeout(() => {
+                this.listarAnotacoes()
+                this.visualizarCardAberto = false
+            }, 2000);
         }
 
         if (!this.visualizarCardAberto) this.salvarService(this.cards, 'excluido')
@@ -90,7 +95,6 @@ export class AnotacoesComponent implements OnInit {
 
     public open(card: number) {
         this.visualizarCardAberto = !this.visualizarCardAberto
-        this.cardOpen = card
         this.mostraSomenteCardAberto(card)
     }
 

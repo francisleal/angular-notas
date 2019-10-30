@@ -13,11 +13,13 @@ export class LinksComponent implements OnInit {
 
     linksJson: any[] = []
     listaAlm: any[] = []
-    order: string = 'titulo';
+    order: string = 'titulo'
 
-    reverse: boolean = false;
+    reverse: boolean = false
 
-    loading: boolean;
+    loading: boolean
+
+    buttonConfirmaExclusao: boolean
 
     constructor(
         private router: Router,
@@ -59,6 +61,10 @@ export class LinksComponent implements OnInit {
 
     public editar(link: any) {
         this.router.navigate(['links/edit', link.id])
+    }
+
+    public confirmaExclusao(confirmaExclusao: any) {
+        this.buttonConfirmaExclusao = confirmaExclusao
     }
 
 }

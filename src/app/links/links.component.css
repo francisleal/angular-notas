@@ -23,6 +23,16 @@ table th.link {
 
 .botoes-lista {
     text-align: right;
+    width: 140px;
+}
+
+.botoes-lista.alm {
+    text-align: right;
+    width: 105px;
+}
+
+.botoes-lista svg {
+    width: 14px;
 }
 
 .btn-icon-svg {
@@ -30,4 +40,12 @@ table th.link {
     cursor: pointer;
     width: 14px; 
     margin-left: 0.75rem;
+}
+
+.btn-icon-svg.cancelar {
+    color: #28a745;
+}
+
+.btn-icon-svg.deletar {
+    color: #dc3545;
 }

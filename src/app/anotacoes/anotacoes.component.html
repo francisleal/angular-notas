@@ -20,7 +20,7 @@
 </div>
 
 <div class=" d-flex flex-wrap">
-    <div *ngFor="let card of cards" class="card" [ngClass]="{'card-open': cardOpen == card.id && visualizarCardAberto}" [style.borderColor]="isReadonly != card.id ? '#dfdfdf' : 'green'">
+    <div *ngFor="let card of cards" class="card" [class.card-open]="visualizarCardAberto" [style.borderColor]="isReadonly != card.id ? '#dfdfdf' : 'green'">
         <div class="card-header">
             <input [(ngModel)]="card.titulo" [readonly]="isReadonly != card.id" type="text" class="input"
                 placeholder="Título">
