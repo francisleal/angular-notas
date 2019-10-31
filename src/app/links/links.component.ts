@@ -63,7 +63,7 @@ export class LinksComponent implements OnInit {
         this.router.navigate(['links/edit', link.id])
     }
 
-    public confirmaExclusao(confirmaExclusao: any) {
+    public confirmaExclusao(confirmaExclusao?: any) {
         this.buttonConfirmaExclusao = confirmaExclusao
     }
 
