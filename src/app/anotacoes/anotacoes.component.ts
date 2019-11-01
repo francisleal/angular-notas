@@ -15,6 +15,8 @@ export class AnotacoesComponent implements OnInit {
     public visualizarCardAberto: boolean = false
     public isReadonly: boolean = true
 
+    public searchValue: string
+
     public cards: any = []
     public cardsMap: any = []
 

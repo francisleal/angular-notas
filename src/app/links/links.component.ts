@@ -11,15 +11,17 @@ import { AlertService } from '../alert/alert.service';
 })
 export class LinksComponent implements OnInit {
 
-    linksJson: any[] = []
-    listaAlm: any[] = []
-    order: string = 'titulo'
+    public linksJson: any[] = []
+    public listaAlm: any[] = []
 
-    reverse: boolean = false
+    public order: string = 'titulo'
 
-    loading: boolean
+    public reverse: boolean = false
+    public loading: boolean
+    public buttonConfirmaExclusao: boolean
 
-    buttonConfirmaExclusao: boolean
+    public filtro: string;
+    public filtroAll: string;
 
     constructor(
         private router: Router,
@@ -29,7 +31,7 @@ export class LinksComponent implements OnInit {
 
     ngOnInit() {
         this.listarLinks();
-    }
+    }   
 
     private listarLinks() {
         this.NotasService.getLinks().subscribe(
@@ -67,4 +69,21 @@ export class LinksComponent implements OnInit {
         this.buttonConfirmaExclusao = confirmaExclusao
     }
 
+    public filtrarLinksAlm() {
+        if (this.listaAlm.length === 0 || this.filtro === undefined || this.filtro.trim() === '') {
+            return this.listaAlm;
+        }
+        return this.listaAlm.filter(
+            alm => alm.titulo.toLocaleLowerCase().includes(this.filtro.toLocaleLowerCase())
+        );
+    }
+
+    public filtrarLinksAll() {
+        if (this.linksJson.length === 0 || this.filtroAll === undefined || this.filtroAll.trim() === '') {
+            return this.linksJson;
+        }
+        return this.linksJson.filter(
+            all => all.titulo.toLocaleLowerCase().includes(this.filtroAll.toLocaleLowerCase())
+        );
+    }
 }

@@ -19,8 +19,12 @@
     </div>
 </div>
 
+<input type="text" class="form-control" placeholder="pesquisar..." [(ngModel)]="searchValue" style="width: 31%;">
+
+<br />
+
 <div class=" d-flex flex-wrap">
-    <div *ngFor="let card of cards" class="card" [class.card-open]="visualizarCardAberto" [style.borderColor]="isReadonly != card.id ? '#dfdfdf' : 'green'">
+    <div *ngFor="let card of cards | filter: 'titulo' : searchValue" class="card" [class.card-open]="visualizarCardAberto" [style.borderColor]="isReadonly != card.id ? '#dfdfdf' : 'green'">
         <div class="card-header">
             <input [(ngModel)]="card.titulo" [readonly]="isReadonly != card.id" type="text" class="input"
                 placeholder="Título">

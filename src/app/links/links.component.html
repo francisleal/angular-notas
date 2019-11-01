@@ -22,11 +22,16 @@
 <div *ngIf="loading">
     <div class="row">
         <div class="col-md-4">
+
+            <input type="text" class="form-control" placeholder="pesquisar..." [(ngModel)]="filtro" />
+
+            <br />
+
             <div class="card">
                 <h4 class="title-tarefa">Tarefas Alm</h4>
                 <table class="table table-hover">
                     <tbody>
-                        <tr *ngFor="let link of listaAlm">
+                        <tr *ngFor="let link of filtrarLinksAlm()">
                             <td>
                                 <a href="{{link.url}}" target="_blank" rel="noopener noreferrer">{{link.titulo}}</a>
                             </td>
@@ -75,6 +80,11 @@
         </div>
 
         <div class="col-md-8">
+
+            <input type="text" class="form-control" placeholder="pesquisar..." [(ngModel)]="filtroAll" />
+
+            <br />
+
             <div class="card">
                 <div class="card-body">
                     <table class="table table-hover">
@@ -99,7 +109,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let link of linksJson | orderBy: order:reverse: true ; index as i">
+                            <tr *ngFor="let link of filtrarLinksAll() | orderBy: order:reverse: true ; index as i">
                                 <th scope="row">{{i + 1}}</th>
                                 <td>{{link.icon}}</td>
                                 <td><a href="{{link.url}}" target="_blank" rel="noopener noreferrer">{{link.titulo}}</a>
