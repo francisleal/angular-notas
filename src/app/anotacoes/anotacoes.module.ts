@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 
 import { AnotacoesRoutingModule } from './anotacoes.routing.module';
 import { AnotacoesComponent } from './anotacoes.component';
+import { FilterPipe } from '../pipe/filter.pipe';
 
 @NgModule({
-  declarations: [AnotacoesComponent],
+  declarations: [AnotacoesComponent, FilterPipe],
   imports: [
     CommonModule,
     AnotacoesRoutingModule,
