@@ -9,8 +9,8 @@ export class AlertService {
 
     constructor() { }
 
-    private alert(mensagen: string, tipo: string) {
-        this.alertShowEmitter.emit({ mensagen, tipo });
+    private alert(mensagem: string, tipo: string) {
+        this.alertShowEmitter.emit({ mensagem, tipo });
     }
 
     primary(msg: string) {

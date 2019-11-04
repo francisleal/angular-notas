@@ -28,7 +28,7 @@ export class AlertComponent implements OnInit {
     alerta() {
         this.alertService.alertShowEmitter.subscribe(
             (alert: any) => {
-                this.alertMessage = alert.mensagen
+                this.alertMessage = alert.mensagem
                 this.alertType = alert.tipo
                 this.alert = true
                 this.closeTimeout()
