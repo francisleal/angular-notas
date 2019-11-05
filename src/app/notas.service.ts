@@ -36,11 +36,19 @@ export class NotasService {
         return this.http.delete(`${this.url}/links/${id}`);
     }
 
-    public getAnotacoes():Observable<Anotacao[]> {
+    public getAnotacoes(): Observable<Anotacao[]> {
         return this.http.get<Anotacao[]>(`${this.url}/anotacao/notas`);
     }
 
-    public salvarAnotacao(anotacao: any):Observable<Anotacao> {
+    public salvarAnotacao(anotacao: any): Observable<Anotacao> {
         return this.http.put<Anotacao>(`${this.url}/anotacao/notas`, anotacao);
+    }
+
+    public getItems(key: string) {
+        return JSON.parse(localStorage.getItem(key))
+    }
+
+    public setItems(key: string, value: any) {
+        localStorage.setItem(key, JSON.stringify(value))
     }
 }

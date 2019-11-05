@@ -9,8 +9,6 @@ import { AlertService } from '../alert/alert.service';
 })
 export class AuthService {
 
-    private usuarioAutenticado: boolean = false
-
     public mostarMenuEmitter = new EventEmitter<boolean>()
 
     constructor(
@@ -20,17 +18,24 @@ export class AuthService {
 
     logar(usuario: Usuario) {
         if (usuario.nome == 'email@email.com' && usuario.senha == '123456') {
-
-            this.usuarioAutenticado = true
-
-            this.mostarMenuEmitter.emit(true)
-
-            this.router.navigate(['/'])
-
+            this.usuarioAutenticado()
         } else {
-            this.usuarioAutenticado = false;
-            this.mostarMenuEmitter.emit(false)
-            this.alertService.danger('login inválido')
+            this.usuarioInvalido()
         }
+    }
+
+    remember(usuarioAutenticado: boolean) {
+        if (usuarioAutenticado == true)
+            this.usuarioAutenticado()
+    }
+
+    private usuarioAutenticado() {
+        this.mostarMenuEmitter.emit(true)
+        this.router.navigate(['/'])
+    }
+
+    private usuarioInvalido() {
+        this.mostarMenuEmitter.emit(false)
+        this.alertService.danger('login inválido')
     }
 }

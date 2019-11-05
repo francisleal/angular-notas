@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './auth.service';
 import { Usuario } from './usuario';
+import { NotasService } from '../notas.service';
 
 @Component({
     selector: 'app-login',
@@ -11,12 +12,16 @@ import { Usuario } from './usuario';
 export class LoginComponent implements OnInit {
 
     public usuario: Usuario = new Usuario()
-    public remember: boolean = true;
+    public remember: boolean = true
+    public loading: boolean = false
 
-    constructor(private authService: AuthService) { }
+    constructor(
+        private authService: AuthService,
+        private localStorage: NotasService
+    ) { }
 
     ngOnInit() {
-        this.getLocalStorage();
+        this.getItemsLocalStorage();
     }
 
     logar() {
@@ -24,22 +29,25 @@ export class LoginComponent implements OnInit {
         this.setItemLocalStorage()
     }
 
-    getLocalStorage() {
-        let localStorageGetItem = localStorage.getItem("usuario");
+    private getItemsLocalStorage() {
+        if (this.localStorage.getItems('usuario')) {
 
-        if (localStorageGetItem != null) {
-            let getItem = JSON.parse(localStorageGetItem)
+            this.usuario.nome = this.localStorage.getItems('usuario')['nome'];
+            this.usuario.senha = this.localStorage.getItems('usuario')['senha'];
 
-            this.usuario.nome = getItem.nome;
-            this.usuario.senha = getItem.senha;
+            if (this.localStorage.getItems('usuario')['remember'] == true) {
+                this.loading = true
+                setTimeout(() => this.logar(), 0);
+            }
         }
     }
 
-    setItemLocalStorage() {
-        if (this.remember == true) {
-            localStorage.setItem("usuario", JSON.stringify(this.usuario));
-        } else {
-            localStorage.removeItem("usuario");
+    private setItemLocalStorage() {
+        let remember = {
+            nome: this.usuario.nome,
+            senha: this.usuario.senha,
+            remember: this.remember
         }
+        this.localStorage.setItems('usuario', remember)
     }
 }
