@@ -15,6 +15,8 @@ export class AnotacoesComponent implements OnInit {
     public visualizarCardAberto: boolean = false
     public isReadonly: boolean = true
 
+    public buttonConfirmaExclusao: boolean
+
     public searchValue: string
 
     public cards: any = []
@@ -77,6 +79,10 @@ export class AnotacoesComponent implements OnInit {
         }
 
         if (!this.visualizarCardAberto) this.salvarService(this.cards, 'excluido')
+    }
+
+    public confirmaExclusao(confirmaExclusao?: any) {
+        this.buttonConfirmaExclusao = confirmaExclusao
     }
 
     private salvarService(anotacoesParametro: any, alertMensagem: string) {

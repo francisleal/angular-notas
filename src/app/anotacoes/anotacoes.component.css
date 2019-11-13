@@ -31,6 +31,7 @@ textarea {
 
 .excluir {
     float: right;
+    margin-left: 16px;
 }
 
 .fa-arrow-to-right {

@@ -24,7 +24,8 @@
 <br />
 
 <div class=" d-flex flex-wrap">
-    <div *ngFor="let card of cards | filter: 'titulo' : searchValue" class="card" [class.card-open]="visualizarCardAberto" [style.borderColor]="isReadonly != card.id ? '#dfdfdf' : 'green'">
+    <div *ngFor="let card of cards | filter: 'titulo' : searchValue" class="card"
+        [class.card-open]="visualizarCardAberto" [style.borderColor]="isReadonly != card.id ? '#dfdfdf' : 'green'">
         <div class="card-header">
             <input [(ngModel)]="card.titulo" [readonly]="isReadonly != card.id" type="text" class="input"
                 placeholder="Título">
@@ -46,7 +47,15 @@
             <small *ngIf="isReadonly == card.id" lass="text-muted" (click)="salvar(card)" class="salvar">salvar</small>
             <small *ngIf="isReadonly != card.id" class="text-muted" (click)="isReadonly = card.id"
                 class="editar">editar</small>
-            <small class="text-muted" (click)="excluir(card.id)" class="excluir">excluir</small>
+
+            <span [hidden]="buttonConfirmaExclusao != card.id">
+                <small (click)="excluir(card.id)" class="text-muted" class="excluir text-danger">excluir</small>
+                <small (click)="confirmaExclusao()" class="text-muted" class="excluir text-success">cancelar</small>
+            </span>
+
+            <span [hidden]="buttonConfirmaExclusao == card.id">
+                <small (click)="confirmaExclusao(card.id)" class="text-muted" class="excluir">excluir</small>
+            </span>
         </div>
     </div>
 </div>
