@@ -41,7 +41,7 @@ body {
     color: #818896 !important;
   }
   .sidebar .nav-link .feather {
-    margin-right: 4px !important;
+    /* margin-right: 4px !important; */
     color: #999 !important;
   }
   .sidebar .nav-link.active {

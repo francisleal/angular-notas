@@ -9,7 +9,14 @@ export class SenhaComponent implements OnInit {
 
   constructor() { }
 
+  senhas: any[] = ["Saab", "Volvo", "BMW"];
+
   ngOnInit() {
+    this.init()
+  }
+
+  init() {
+    this.senhas;
   }
 
 }

@@ -15,9 +15,13 @@ const routes: Routes = [
         loadChildren: './links/links.module#LinksModule'
     },
     {
+        path: 'senhas',
+        loadChildren: './senha/senha.module#SenhaModule'
+    },
+    {
         path: 'login',
         loadChildren: './login/login.module#LoginModule'
-    },
+    },    
     {
         path: '',
         pathMatch: 'full',

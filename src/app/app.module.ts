@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
-import { SenhaComponent } from './senha/senha.component';
 import { AuthService } from './login/auth.service';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert/alert.service';
@@ -14,7 +13,6 @@ import { AlertService } from './alert/alert.service';
   declarations: [
     AppComponent,
     MenuComponent,
-    SenhaComponent,
     AlertComponent    
   ],
   imports: [
