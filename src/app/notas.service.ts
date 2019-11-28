@@ -4,13 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment'
 import { Links } from './links/links';
 import { Anotacao } from './anotacoes/anotacao';
+import { Senha } from './senha/senha';
 
 @Injectable({
     providedIn: 'root'
 })
 export class NotasService {
-
-
 
     public url = environment.host
 
@@ -50,5 +49,17 @@ export class NotasService {
 
     public setItems(key: string, value: any) {
         localStorage.setItem(key, JSON.stringify(value))
+    }
+
+    public getSenhas(): Observable<Senha[]> {
+        return this.http.get<Senha[]>(`${this.url}/senhas`);
+    }
+
+    public salvarSenhar(senha: Senha): Observable<Senha> {
+        return this.http.post<Senha>(`${this.url}/senhas`, senha);
+    }
+
+    public deletarSenha(id: number): Observable<any> {
+        return this.http.delete(`${this.url}/senhas/${id}`)
     }
 }

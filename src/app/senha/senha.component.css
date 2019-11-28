@@ -1,0 +1,23 @@
+.list-senha {
+    cursor: copy;
+    display: inline-block;
+    width: 82%;   
+}
+.list-senha-input {
+    border: none;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+.icon-list-senha svg {
+    opacity: 0.5;
+}
+.icon-list-senha svg:first-child {
+    cursor: copy;
+    margin-right: 5px;
+}
+.icon-list-senha svg:last-child:hover {
+    cursor: pointer;
+    opacity: 1;
+}
