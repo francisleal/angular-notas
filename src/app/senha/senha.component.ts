@@ -12,7 +12,7 @@ export class SenhaComponent implements OnInit {
     constructor(private NotasService: NotasService, private Alert: AlertService) { }
 
     senhas: any[] = [];
-    loading: boolean;
+    loading: boolean = false;
 
     ngOnInit() {
         this.listarSenhas()
@@ -28,7 +28,7 @@ export class SenhaComponent implements OnInit {
     }
 
     copiarSenha(id: any) {
-        let copiar = document.getElementById(id) as HTMLInputElement;
+        const copiar = document.getElementById(id) as HTMLInputElement;
         copiar.select()
         if(copiar) {
             this.Alert.sucesso('Senha copiada com sucesso')
@@ -39,8 +39,8 @@ export class SenhaComponent implements OnInit {
     deleter(id: number) {
         this.NotasService.deletarSenha(id).subscribe(
             sucesso => {
+                this.Alert.danger(`Senha deletada com sucesso`)
                 this.listarSenhas()
-                this.Alert.sucesso(`Senha deletada com sucesso`)
             },
             error => this.Alert.danger(`Error ao deletar senha ${error}`)
         )

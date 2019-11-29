@@ -46,11 +46,12 @@ export class SenhaCadastroComponent implements OnInit {
         )
 
         this.NotasService.salvarSenhar(senha).subscribe(
-            alert => this.Alerta.sucesso(`Senha "${alert.nome}" salva com sucesso`),
+             alert => {
+                this.Alerta.sucesso(`Senha "${alert.nome}" salva com sucesso`)
+                this.voltar();
+            },
             error => this.Alerta.danger(`Erro ao salvar a senha ${error}`)
         )
-
-        this.voltar();
     }
 
     public voltar() {
