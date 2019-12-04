@@ -29,11 +29,7 @@ export class NotasService {
 
     public edit(id: any): Observable<any> {
         return this.http.get<any>(`${this.url}/links/${id}`);
-    }
-
-    public delete(id: string): Observable<any> {
-        return this.http.delete(`${this.url}/links/${id}`);
-    }
+    }    
 
     public getAnotacoes(): Observable<Anotacao[]> {
         return this.http.get<Anotacao[]>(`${this.url}/anotacao/notas`);
@@ -58,8 +54,9 @@ export class NotasService {
     public salvarSenhar(senha: Senha): Observable<Senha> {
         return this.http.post<Senha>(`${this.url}/senhas`, senha);
     }
-
-    public deletarSenha(id: number): Observable<any> {
-        return this.http.delete(`${this.url}/senhas/${id}`)
+      
+    // serviço de delete para toda aplicação
+    public delete(id: any, pathname: string): Observable<any> {
+        return this.http.delete(`${this.url}/${pathname}/${id}`);
     }
 }

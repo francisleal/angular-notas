@@ -22,6 +22,8 @@ export class LinksComponent implements OnInit {
 
     public filtro: string;
     public filtroAll: string;
+    
+    public pathname: string = "links"
 
     constructor(
         private router: Router,
@@ -46,7 +48,7 @@ export class LinksComponent implements OnInit {
     }
 
     public deletar(id: string) {
-        this.NotasService.delete(id).subscribe(
+        this.NotasService.delete(id, this.pathname).subscribe(
             sucesso => {
                 this.listarLinks()
                 this.AlertService.danger('excluido com sucesso')

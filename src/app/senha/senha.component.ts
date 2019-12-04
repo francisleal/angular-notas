@@ -13,6 +13,7 @@ export class SenhaComponent implements OnInit {
 
     senhas: any[] = [];
     loading: boolean = false;
+    pathname: string = "senhas"
 
     ngOnInit() {
         this.listarSenhas()
@@ -37,7 +38,7 @@ export class SenhaComponent implements OnInit {
     }
 
     deleter(id: number) {
-        this.NotasService.deletarSenha(id).subscribe(
+        this.NotasService.delete(id, this.pathname).subscribe(
             sucesso => {
                 this.Alert.danger(`Senha deletada com sucesso`)
                 this.listarSenhas()
