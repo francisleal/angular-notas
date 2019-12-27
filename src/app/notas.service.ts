@@ -25,11 +25,7 @@ export class NotasService {
 
     public editarLink(link: Links): Observable<Links> {
         return this.http.put<Links>(`${this.url}/links/${link.id}`, link);
-    }
-
-    public edit(id: any): Observable<any> {
-        return this.http.get<any>(`${this.url}/links/${id}`);
-    }    
+    }      
 
     public getAnotacoes(): Observable<Anotacao[]> {
         return this.http.get<Anotacao[]>(`${this.url}/anotacao/notas`);
@@ -54,8 +50,18 @@ export class NotasService {
     public salvarSenhar(senha: Senha): Observable<Senha> {
         return this.http.post<Senha>(`${this.url}/senhas`, senha);
     }
-      
-    // serviço de delete para toda aplicação
+    
+    public editarSenha(senha: Senha): Observable<Senha> {
+        console.log(senha);
+        return this.http.put<Senha>(`${this.url}/senhas/${senha.id}`, senha)
+    }
+
+    // serviço para tela de editar - toda aplicação
+    public edit(id: any, pathname: string): Observable<any> {
+        return this.http.get<any>(`${this.url}/${pathname}/${id}`);
+    } 
+
+    // serviço para deletar toda aplicação
     public delete(id: any, pathname: string): Observable<any> {
         return this.http.delete(`${this.url}/${pathname}/${id}`);
     }

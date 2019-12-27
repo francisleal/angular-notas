@@ -2,7 +2,7 @@
     <h1 class="h2">Adicionar Link</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
-            <button class="btn btn-sm btn-outline-secondary" (click)="voltar()">Voltar</button>
+            <button class="btn btn-sm btn-outline-secondary" routerLink="../../links">Voltar</button>
         </div>
     </div>
 </div>
@@ -40,8 +40,6 @@
         </div>
     </div>
 
-    <button *ngIf="save" (click)="salvar()" (click)="voltar()" class="btn btn-primary">salvar</button>
-    <button *ngIf="!save" (click)="editar()" (click)="voltar()" class="btn btn-primary">Editar</button>
+    <button *ngIf="save" (click)="salvar()" class="btn btn-primary">salvar</button>
+    <button *ngIf="!save" (click)="editar()" class="btn btn-primary">Editar</button>
 </form>
-
-<!-- {{ links | json }} -->

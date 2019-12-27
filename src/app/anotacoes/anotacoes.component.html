@@ -19,7 +19,7 @@
     </div>
 </div>
 
-<input type="text" class="form-control" placeholder="pesquisar..." [(ngModel)]="searchValue" style="width: 31%;">
+<input *ngIf="!visualizarCardAberto" type="text" class="form-control" placeholder="pesquisar..." [(ngModel)]="searchValue" style="width: 31%;" />
 
 <br />
 

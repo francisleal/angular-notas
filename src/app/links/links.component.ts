@@ -64,7 +64,7 @@ export class LinksComponent implements OnInit {
     }
 
     public editar(link: any) {
-        this.router.navigate(['links/edit', link.id])
+        this.router.navigate([`${this.pathname}/edit`, link.id])
     }
 
     public confirmaExclusao(confirmaExclusao?: any) {

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { NotasService } from '../notas.service';
 import { AlertService } from '../alert/alert.service';
 
@@ -9,7 +11,11 @@ import { AlertService } from '../alert/alert.service';
 })
 export class SenhaComponent implements OnInit {
 
-    constructor(private NotasService: NotasService, private Alert: AlertService) { }
+    constructor(
+        private router: Router,
+        private NotasService: NotasService,
+        private Alert: AlertService
+    ) { }
 
     senhas: any[] = [];
     loading: boolean = false;
@@ -35,6 +41,10 @@ export class SenhaComponent implements OnInit {
             this.Alert.sucesso('Senha copiada com sucesso')
         }
         document.execCommand("copy")
+    }
+
+    editar(id: number) {
+        this.router.navigate([`${this.pathname}/edit`, id])
     }
 
     deleter(id: number) {
