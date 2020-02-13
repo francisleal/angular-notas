@@ -12,6 +12,7 @@ import { Senha } from './senha/senha';
 export class NotasService {
 
     public url = environment.host
+    public urlFB = environment.hostFireBbase
 
     constructor(private http: HttpClient) { }
 
@@ -64,5 +65,18 @@ export class NotasService {
     // serviço para deletar toda aplicação
     public delete(id: any, pathname: string): Observable<any> {
         return this.http.delete(`${this.url}/${pathname}/${id}`);
+    }
+
+    // lista dados de senha do firebase
+    public listarSenhasNuvem() {
+        return this.http.get('https://meus-dados-8d039.firebaseio.com/senhas.json');
+    }
+
+    public salvarSenhaNuvem(senha: any) {
+        return this.http.put("https://meus-dados-8d039.firebaseio.com/senhas/" + senha.id + ".json", senha);
+    }
+
+    public deletarSenhaNuvem(id: any) {
+        return this.http.delete("https://meus-dados-8d039.firebaseio.com/senhas/" + id + ".json");
     }
 }

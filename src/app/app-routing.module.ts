@@ -19,6 +19,10 @@ const routes: Routes = [
         loadChildren: './senha/senha.module#SenhaModule'
     },
     {
+        path: 'nuvemSenhas',
+        loadChildren: './nuvem/senha/senha.module#SenhaModule'
+    },
+    {
         path: 'login',
         loadChildren: './login/login.module#LoginModule'
     },    

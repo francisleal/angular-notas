@@ -1,0 +1,99 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Senhas</h1>
+</div>
+
+<div *ngIf="loading">
+    <svg class="svg-inline--fa fa-spinner fa-w-16 fa-3x rotate" style="width: 16px;" aria-hidden="true"
+        focusable="false" data-prefix="fas" data-icon="spinner" role="img" xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512">
+        <path fill="currentColor"
+            d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z"
+            class=""></path>
+    </svg>
+</div>
+
+<div *ngIf="!loading">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="formularioSenha" (ngSubmit)="editarSalvarSenhaNuvem()">
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input type="text" formControlName="nome" class="form-control" id="staticEmail"
+                                    placeholder="Nome">
+
+                                <div *ngIf="!nome.pristine && nome.errors" class="text-danger">
+                                    <span *ngIf="nome.errors.required">
+                                        Campo obrigatório.
+                                    </span>
+                                    <span *ngIf="nome.errors.minlength">
+                                        Nome deve ter no mínimo 4 caracters.
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input type="password" formControlName="senha" class="form-control" id="inputPassword"
+                                    placeholder="Password">
+
+                                <div *ngIf="!senha.pristine && senha.errors" class="text-danger">
+                                    <span *ngIf="senha.errors.required">
+                                        Campo obrigatório.
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div *ngIf="btnAdicionar" class="col-12">
+                                <button [disabled]="!formularioSenha.valid" type="submit"
+                                    class="btn btn-primary mb-2">Adicionar</button>
+                            </div>
+                            <div *ngIf="!btnAdicionar" class="col-12">
+                                <button [disabled]="!formularioSenha.valid" type="submit"
+                                    class="btn btn-primary mb-2">Editar</button>
+                                <button (click)="cancelar()" type="submit" class="btn btn mb-2">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li *ngFor="let senha of senhas" class="list-group-item list-group-item-action">
+                    <span class="list-senha"> {{ senha.nome }}</span>
+
+                    <span class="float-right icon-list-senha">
+                        <!-- <svg (click)="copiarSenha(senha.id)" height="16" width="16" aria-hidden="true" focusable="false"
+                            role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path fill="currentColor"
+                                d="M433.941 65.941l-51.882-51.882A48 48 0 0 0 348.118 0H176c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h224c26.51 0 48-21.49 48-48v-48h80c26.51 0 48-21.49 48-48V99.882a48 48 0 0 0-14.059-33.941zM266 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h74v224c0 26.51 21.49 48 48 48h96v42a6 6 0 0 1-6 6zm128-96H182a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h106v88c0 13.255 10.745 24 24 24h88v202a6 6 0 0 1-6 6zm6-256h-64V48h9.632c1.591 0 3.117.632 4.243 1.757l48.368 48.368a6 6 0 0 1 1.757 4.243V112z">
+                            </path>
+                        </svg>
+                        -->
+
+                        <svg (click)="editarSenha(senha)" title="editar" aria-hidden="true" height="16" width="16"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                d="M493.26 56.26l-37.51-37.51C443.25 6.25 426.87 0 410.49 0s-32.76 6.25-45.25 18.74l-74.49 74.49L256 127.98 12.85 371.12.15 485.34C-1.45 499.72 9.88 512 23.95 512c.89 0 1.79-.05 2.69-.15l114.14-12.61L384.02 256l34.74-34.74 74.49-74.49c25-25 25-65.52.01-90.51zM118.75 453.39l-67.58 7.46 7.53-67.69 231.24-231.24 31.02-31.02 60.14 60.14-31.02 31.02-231.33 231.33zm340.56-340.57l-44.28 44.28-60.13-60.14 44.28-44.28c4.08-4.08 8.84-4.69 11.31-4.69s7.24.61 11.31 4.69l37.51 37.51c6.24 6.25 6.24 16.4 0 22.63z"
+                                class="">
+                            </path>
+                        </svg>
+
+
+                        <svg (click)="deletarSenhaNuvem(senha.id)" class="text-danger" height="16" width="16"
+                            aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512">
+                            <path fill="currentColor"
+                                d="M432 80h-82.4l-34-56.7A48 48 0 0 0 274.4 0H173.6a48 48 0 0 0-41.2 23.3L98.4 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16l21.2 339a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM173.6 48h100.8l19.2 32H154.4zm173.3 416H101.11l-21-336h287.8z">
+                            </path>
+                        </svg>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
