@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AlertService } from 'src/app/alert/alert.service';
 import { NotasService } from 'src/app/notas.service';
-import { Senha } from 'src/app/senha/senha';
 
 @Component({
     selector: 'app-senha',
@@ -16,8 +15,9 @@ export class SenhaComponent implements OnInit {
     public senhas: any = [];
     public loading: boolean = true;
     public btnAdicionar: boolean = true;
+    public pathname: string = 'senhas';
 
-    private idSalvoNaVariavel: any;
+    private dadosFormularioID: number;
 
     constructor(
         private fb: FormBuilder,
@@ -38,13 +38,24 @@ export class SenhaComponent implements OnInit {
     }
 
     private listarSenhaNuvem() {
-        this.NotasService.listarSenhasNuvem().subscribe(
-            sucesso => {
-                this.senhas = Object.values(sucesso)
-                this.loading = false
-            },
-            error => this.Alert.danger(`ERROR - ${error.message}`)
+        this.NotasService.listarfb(this.pathname).subscribe(
+            sucesso => this.listaSucesso(sucesso),
+            error => this.AlertError(error)
         )
+    }
+
+    private listaSucesso(data: any) {
+        this.senhas = Object.values(data)
+        this.loading = false
+    }
+
+    private AlertError(errorMessage: string) {
+        this.Alert.danger(`Error -  ${errorMessage}`)
+    }
+
+    private AlertSucesso(sucessoMessage: string) {
+        this.listarSenhaNuvem()
+        this.Alert.sucesso(sucessoMessage)
     }
 
     public editarSalvarSenhaNuvem() {
@@ -52,25 +63,21 @@ export class SenhaComponent implements OnInit {
         const dadosFormulario = this.formularioSenha.value
 
         if (this.btnAdicionar === true) {
-            this.idSalvoNaVariavel = Math.floor(Math.random() * 9999999)
+            this.dadosFormularioID = Math.floor(Math.random() * 9999999)
         }
 
         let senha = {
-            id: this.idSalvoNaVariavel,
+            id: this.dadosFormularioID,
             nome: dadosFormulario.nome,
             password: dadosFormulario.senha
         }
 
-        this.NotasService.salvarSenhaNuvem(senha).subscribe(
-            sucesso => {
-                this.listarSenhaNuvem()
-                this.Alert.sucesso(`senha ${senha.nome} salva com sucesso`)
-            },
-            error => this.Alert.danger(`ERROR - ${error.message}`)
+        this.NotasService.salvarfb(senha, this.pathname).subscribe(
+            sucesso => this.AlertSucesso(`senha ${senha.nome} salva com sucesso`),
+            error => this.AlertError(error)
         )
 
         this.btnAdicionar = true
-
         this.formularioSenha.reset()
     }
 
@@ -82,19 +89,14 @@ export class SenhaComponent implements OnInit {
     public editarSenha(senha: any) {
         this.nome.setValue(senha.nome)
         this.senha.setValue(senha.password)
-
-        this.idSalvoNaVariavel = senha.id
-
+        this.dadosFormularioID = senha.id
         this.btnAdicionar = false
     }
 
-    public deletarSenhaNuvem(id: any) {
-        this.NotasService.deletarSenhaNuvem(id).subscribe(
-            sucesso => {
-                this.listarSenhaNuvem()
-                this.Alert.sucesso('Senha excluida com sucesso')
-            },
-            error => this.Alert.danger(`ERROR - ${error.message}`)
+    public deletarSenhaNuvem(id: number) {
+        this.NotasService.deletarfb(id, this.pathname).subscribe(
+            sucesso => this.AlertSucesso('Senha excluida com sucesso'),
+            error => this.AlertError(error)
         )
     }
 
@@ -106,5 +108,4 @@ export class SenhaComponent implements OnInit {
     get senha() {
         return this.formularioSenha.get('senha')
     }
-
 }

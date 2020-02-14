@@ -12,7 +12,7 @@ import { Senha } from './senha/senha';
 export class NotasService {
 
     public url = environment.host
-    public urlFB = environment.hostFireBbase
+    public urlfirebaseio = environment.hostfirebaseio
 
     constructor(private http: HttpClient) { }
 
@@ -67,16 +67,16 @@ export class NotasService {
         return this.http.delete(`${this.url}/${pathname}/${id}`);
     }
 
-    // lista dados de senha do firebase
-    public listarSenhasNuvem() {
-        return this.http.get('https://meus-dados-8d039.firebaseio.com/senhas.json');
+    // lista dados do firebase
+    public listarfb(pathname: string) {
+        return this.http.get(`${this.urlfirebaseio}/${pathname}.json`);
     }
 
-    public salvarSenhaNuvem(senha: any) {
-        return this.http.put("https://meus-dados-8d039.firebaseio.com/senhas/" + senha.id + ".json", senha);
+    public salvarfb(senha: any, pathname: string) {
+        return this.http.put(`${this.urlfirebaseio}/${pathname}/${senha.id}.json`, senha);
     }
 
-    public deletarSenhaNuvem(id: any) {
-        return this.http.delete("https://meus-dados-8d039.firebaseio.com/senhas/" + id + ".json");
+    public deletarfb(id: number, pathname: string) {
+        return this.http.delete(`${this.urlfirebaseio}/${pathname}/${id}.json`);
     }
 }
