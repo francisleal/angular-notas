@@ -16,6 +16,7 @@ export class SenhaComponent implements OnInit {
     public loading: boolean = true;
     public btnAdicionar: boolean = true;
     public pathname: string = 'senhas';
+    public mostrarPassword: any;
 
     private dadosFormularioID: number;
 
@@ -98,6 +99,15 @@ export class SenhaComponent implements OnInit {
             sucesso => this.AlertSucesso('Senha excluida com sucesso'),
             error => this.AlertError(error)
         )
+    }
+
+    public mostrarSenha(senha: any, index: number) {
+
+        this.mostrarPassword = index
+
+        console.log(this.mostrarPassword)
+
+        console.log(senha, index)
     }
 
     // Propriedades do formulário que vamos utilizar para obter os erros
