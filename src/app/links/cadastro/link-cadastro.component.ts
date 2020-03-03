@@ -17,7 +17,7 @@ export class LinkCadastroComponent implements OnInit {
     public link: Links = new Links()
     public save: boolean = true
     public inscricao: Subscription
-    public pathname : string = 'links'
+    public pathname: string = 'links'
 
     constructor(
         private route: ActivatedRoute,
@@ -50,16 +50,16 @@ export class LinkCadastroComponent implements OnInit {
         )
     }
 
-    private salvarSucesso (mensagem: string) {
+    private salvarSucesso(mensagem: string) {
         this.alertService.sucesso(`${mensagem} - editado com sucesso`)
         this.router.navigate([`/${this.pathname}`]);
     }
-    
-    private salvarError (messagem: string) {
+
+    private salvarError(messagem: string) {
         this.alertService.danger(`ERROR - ${messagem}`)
     }
 
-    private paginaEditar () {
+    private paginaEditar() {
         this.inscricao = this.route.params.subscribe(
             route => {
                 if (typeof route.id != 'undefined') {
@@ -73,5 +73,5 @@ export class LinkCadastroComponent implements OnInit {
                 }
             }
         )
-    }    
+    }
 }

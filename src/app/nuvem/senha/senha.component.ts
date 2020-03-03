@@ -74,7 +74,7 @@ export class SenhaComponent implements OnInit {
         }
 
         this.NotasService.salvarfb(senha, this.pathname).subscribe(
-            sucesso => this.AlertSucesso(`senha ${senha.nome} salva com sucesso`),
+            () => this.AlertSucesso(`senha ${senha.nome} salva com sucesso`),
             error => this.AlertError(error)
         )
 
@@ -96,18 +96,13 @@ export class SenhaComponent implements OnInit {
 
     public deletarSenhaNuvem(id: number) {
         this.NotasService.deletarfb(id, this.pathname).subscribe(
-            sucesso => this.AlertSucesso('Senha excluida com sucesso'),
+            () => this.AlertSucesso('Senha excluida com sucesso'),
             error => this.AlertError(error)
         )
     }
 
-    public mostrarSenha(senha: any, index: number) {
-
+    public mostrarSenha(index: number) {
         this.mostrarPassword = index
-
-        console.log(this.mostrarPassword)
-
-        console.log(senha, index)
     }
 
     // Propriedades do formulário que vamos utilizar para obter os erros
