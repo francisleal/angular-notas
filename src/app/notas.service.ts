@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment'
+import { environment, environmentFirebase } from 'src/environments/environment'
 import { Links } from './links/links';
 import { Anotacao } from './anotacoes/anotacao';
 import { Senha } from './senha/senha';
@@ -12,7 +12,7 @@ import { Senha } from './senha/senha';
 export class NotasService {
 
     public url = environment.host
-    public urlfirebaseio = environment.hostfirebaseio
+    public urlfirebaseio = environmentFirebase.host
 
     constructor(private http: HttpClient) { }
 

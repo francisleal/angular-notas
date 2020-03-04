@@ -1,4 +1,10 @@
+
+
 export const environment = {
   production: true,
-  host: 'http://localhost:3000'
+  host: localhost
 };
+
+export const environmentFirebase = {
+  host: firebaseio
+}
